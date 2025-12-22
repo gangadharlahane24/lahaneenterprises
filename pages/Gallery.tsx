@@ -1,0 +1,169 @@
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Play, X, Image as ImageIcon, Youtube } from 'lucide-react';
+
+const GALLERY_IMAGES = [
+  'https://picsum.photos/seed/install1/1200/600',
+  'https://picsum.photos/seed/install2/1200/600',
+  'https://picsum.photos/seed/install3/1200/600',
+  'https://picsum.photos/seed/install4/1200/600',
+];
+
+const VIDEOS = [
+  { id: '1', title: 'Invisible Grill Installation Process', thumbnail: 'https://picsum.photos/seed/vid1/600/400', youtubeId: 'LXb3EKWsInQ' }, // Nature video 4k placeholder
+  { id: '2', title: 'Bird Netting for High Rise Balconies', thumbnail: 'https://picsum.photos/seed/vid2/600/400', youtubeId: 'ysz5S6P_ks0' }, // SpaceX Launch placeholder
+  { id: '3', title: 'Pest Control Treatment Explained', thumbnail: 'https://picsum.photos/seed/vid3/600/400', youtubeId: 'jNQXAC9IVRw' }, // Zoo placeholder
+  { id: '4', title: 'Strength Test: 316 Stainless Steel', thumbnail: 'https://picsum.photos/seed/vid4/600/400', youtubeId: 'ScMzIvxBSi4' }, // Python placeholder
+];
+
+const Gallery: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Auto-advance slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % GALLERY_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % GALLERY_IMAGES.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length);
+
+  // Swipe Handlers
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null); // Reset touch end
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
+  return (
+    <div className="bg-slate-50 min-h-screen">
+      
+      {/* Hero Header */}
+      <div className="bg-slate-900 text-white py-12 px-4 text-center">
+        <h1 className="text-4xl font-extrabold mb-2">Our Work Gallery</h1>
+        <p className="text-slate-400">See our latest installations and safety demonstrations.</p>
+      </div>
+
+      {/* Image Slider Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex items-center gap-2 mb-6">
+          <ImageIcon className="w-6 h-6 text-blue-600" />
+          <h2 className="text-2xl font-bold text-slate-900">Project Photos</h2>
+        </div>
+        
+        <div 
+          className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[16/9] md:aspect-[21/9] bg-slate-200 group touch-pan-y"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          <img 
+            src={GALLERY_IMAGES[currentSlide]} 
+            alt={`Slide ${currentSlide + 1}`} 
+            className="w-full h-full object-cover transition-opacity duration-500 select-none"
+          />
+          
+          {/* Slider Controls */}
+          <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none md:pointer-events-auto">
+            <button onClick={prevSlide} className="p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition pointer-events-auto">
+              <ChevronLeft className="w-8 h-8" />
+            </button>
+            <button onClick={nextSlide} className="p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition pointer-events-auto">
+              <ChevronRight className="w-8 h-8" />
+            </button>
+          </div>
+
+          {/* Indicators */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+            {GALLERY_IMAGES.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`w-3 h-3 rounded-full transition-all ${idx === currentSlide ? 'bg-white scale-110' : 'bg-white/50'}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Video Gallery Section */}
+      <div className="bg-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 mb-8">
+            <Youtube className="w-6 h-6 text-red-600" />
+            <h2 className="text-2xl font-bold text-slate-900">Installation Videos</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {VIDEOS.map((video) => (
+              <div 
+                key={video.id} 
+                className="group cursor-pointer"
+                onClick={() => setSelectedVideo(video.youtubeId)}
+              >
+                <div className="relative rounded-xl overflow-hidden aspect-video shadow-md mb-3">
+                  <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition flex items-center justify-center">
+                    <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center pl-1 shadow-lg group-hover:scale-110 transition">
+                      <Play className="w-6 h-6 text-white fill-current" />
+                    </div>
+                  </div>
+                </div>
+                <h3 className="font-bold text-slate-900 group-hover:text-blue-600 transition">{video.title}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Video Modal */}
+      {selectedVideo && (
+        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
+          <button 
+            onClick={() => setSelectedVideo(null)}
+            className="absolute top-4 right-4 p-2 text-white hover:bg-white/10 rounded-full transition"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          
+          <div className="w-full max-w-5xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl relative">
+            <iframe
+              width="100%"
+              height="100%"
+              src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Gallery;
