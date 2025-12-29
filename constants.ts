@@ -1,6 +1,6 @@
 import { ServiceCategory, ServiceItem, ProductItem } from './types';
 
-export const APP_NAME = "SafeNet Solutions";
+export const APP_NAME = "Lahane Enterprises";
 
 export const SERVICES: ServiceItem[] = [
   {
