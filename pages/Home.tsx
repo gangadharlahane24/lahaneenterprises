@@ -96,7 +96,7 @@ const Home: React.FC = () => {
                 <div className="absolute -top-4 -left-4 w-24 h-24 bg-orange-100 rounded-full -z-10"></div>
                 <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-blue-100 rounded-full -z-10"></div>
                 <img 
-                  src="https://picsum.photos/seed/aboutprev/600/400" 
+                  src="https://scontent.fblr22-2.fna.fbcdn.net/v/t39.30808-6/482959271_1190257523109080_8415173085419701164_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zOnjqfPH_dQQ7kNvwHiCF_7&_nc_oc=Adkxn3fZk_Y-1sapBqJ9fHCEYNvKIko4VnWMNWX5QlgmJACePr78Omsfa8U3gd8hYxZj08RvnD_CACkhGJ7n4kiU&_nc_zt=23&_nc_ht=scontent.fblr22-2.fna&_nc_gid=tMgsze9XfGIpGrIooqwMbA&oh=00_AfmQrWmsS5zrmVZMEx0cKsVzFiKmibBZx-IvKqUskBjAPQ&oe=6958738E" 
                   alt="About SafeNet" 
                   className="rounded-2xl shadow-2xl w-full object-cover border-4 border-white"
                 />

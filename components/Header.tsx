@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShieldCheck, ShoppingCart, Phone } from 'lucide-react';
 import { APP_NAME } from '../constants';
 import { useCart } from '../context/CartContext';
+import logo from '../services/logo/logo.png';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,8 +27,7 @@ const Header: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-              <ShieldCheck className="h-8 w-8 text-blue-600" />
-              <span className="font-bold text-xl text-slate-800 tracking-tight">{APP_NAME}</span>
+              <span className="font-bold text-xl text-slate-800 tracking-tight"><img src={logo} width="150" height="60"/></span>
             </Link>
           </div>
           
