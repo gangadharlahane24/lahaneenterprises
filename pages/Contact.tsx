@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import emailjs from "@emailjs/browser";
+
+
 
 const Contact: React.FC = () => {
   const location = useLocation();
@@ -29,19 +32,45 @@ const Contact: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate form submission
-    console.log('Form Submitted:', formData);
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // Clear cart if this was a purchase inquiry
-    if (formData.service === 'Material Purchase') {
+  const templateParams = {
+    from_name: formData.name,
+    from_email: formData.email,
+    phone: formData.phone,
+    service: formData.service,
+    message: formData.message,
+  };
+
+  try {
+    await emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      templateParams,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    );
+
+    // Clear cart if purchase inquiry
+    if (formData.service === "Material Purchase") {
       clearCart();
     }
 
-    alert('Thank you! We will contact you shortly to confirm your order/inquiry.');
-    setFormData({ name: '', email: '', phone: '', service: 'General Inquiry', message: '' });
-  };
+    alert("Thank you! We will contact you shortly.");
+
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      service: "General Inquiry",
+      message: "",
+    });
+  } catch (error) {
+    console.error("EmailJS Error:", error);
+    alert("Failed to send message. Please try again later.");
+  }
+};
+
 
   return (
     <div className="bg-slate-50 min-h-screen py-16">
