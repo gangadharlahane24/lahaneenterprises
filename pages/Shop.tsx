@@ -99,7 +99,7 @@ const Shop: React.FC = () => {
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex justify-between items-start mb-2">
                   <span className="text-xs text-blue-600 font-bold uppercase tracking-wider">{product.category}</span>
-                  <span className="text-lg font-bold text-slate-900">${product.price}</span>
+                  <span className="text-lg font-bold text-slate-900">₨ {product.price}</span>
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">{product.name}</h3>
                 <p className="text-sm text-slate-500 mb-6 flex-1">{product.description}</p>

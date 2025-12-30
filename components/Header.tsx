@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShieldCheck, ShoppingCart, Phone } from 'lucide-react';
 import { APP_NAME } from '../constants';
 import { useCart } from '../context/CartContext';
-import logo from '../services/logo/logo.png';
+import logo from '../services/logo/logo.jpeg';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

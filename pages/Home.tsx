@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Shield, CheckCircle2, Ruler, MessageCircle, Facebook, Instagram, Twitter, ShoppingBag, Star, Quote, PlayCircle } from 'lucide-react';
+import { ArrowRight, Shield, CheckCircle2, Ruler, MessageCircle, Facebook, Instagram, Twitter, ShoppingBag, Star, Quote, PlayCircle, YoutubeIcon } from 'lucide-react';
 import { SERVICES } from '../constants';
 
 const TESTIMONIALS = [
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
     <div className="flex flex-col">
       {/* Floating WhatsApp Button */}
       <a 
-        href="https://wa.me/15551234567" // Replace with real number
+        href="https://wa.me/919740050148" // Replace with real number
         target="_blank" 
         rel="noopener noreferrer"
         className="fixed bottom-24 right-6 z-40 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition hover:scale-110 flex items-center justify-center"
@@ -250,16 +250,16 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-2xl font-bold text-white mb-8">Connect With Us</h2>
             <div className="flex justify-center gap-8">
-                <a href="#" className="p-4 bg-white/10 rounded-full text-white hover:bg-blue-600 hover:scale-110 transition duration-300">
+                <a href="https://www.facebook.com/profile.php?id=61585941625604" className="p-4 bg-white/10 rounded-full text-white hover:bg-blue-600 hover:scale-110 transition duration-300">
                     <Facebook className="w-8 h-8" />
                 </a>
-                <a href="#" className="p-4 bg-white/10 rounded-full text-white hover:bg-pink-600 hover:scale-110 transition duration-300">
+                <a href="https://www.instagram.com/lahaneenterprises/" className="p-4 bg-white/10 rounded-full text-white hover:bg-pink-600 hover:scale-110 transition duration-300">
                     <Instagram className="w-8 h-8" />
                 </a>
-                <a href="#" className="p-4 bg-white/10 rounded-full text-white hover:bg-sky-500 hover:scale-110 transition duration-300">
-                    <Twitter className="w-8 h-8" />
+                <a href="https://www.youtube.com/@lahaneenterprisesofficial" className="p-4 bg-white/10 rounded-full text-white hover:bg-sky-500 hover:scale-110 transition duration-300">
+                    <YoutubeIcon className="w-8 h-8" />
                 </a>
-                <a href="https://wa.me/15551234567" className="p-4 bg-white/10 rounded-full text-white hover:bg-green-500 hover:scale-110 transition duration-300">
+                <a href="https://wa.me/919740050148" className="p-4 bg-white/10 rounded-full text-white hover:bg-green-500 hover:scale-110 transition duration-300">
                     <MessageCircle className="w-8 h-8" />
                 </a>
             </div>

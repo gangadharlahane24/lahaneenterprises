@@ -42,15 +42,15 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-slate-400 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-blue-400 shrink-0" />
-                <span>123 Safety Avenue, Tech Park District, Metro City, 560001</span>
+                <span>#325, Sarjapura - Attibele Rd, Sarjapura, Bengaluru, Karnataka 562125</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-blue-400 shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91-97400-50-148</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-blue-400 shrink-0" />
-                <span>info@safenetsolutions.com</span>
+                <span>lahaneenterprises25@gmail.com</span>
               </li>
             </ul>
           </div>
